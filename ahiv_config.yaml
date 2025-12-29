@@ -1,0 +1,10 @@
+# Industrial Configuration
+thresholds:
+  battery_min_health: 75.0
+  ssd_max_wear: 90
+  cpu_stress_sec: 20
+  max_safe_temp: 85.0
+  max_whea_errors: 0
+
+meta:
+  company_name: "TechRefurb Global"

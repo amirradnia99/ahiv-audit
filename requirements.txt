@@ -1,0 +1,5 @@
+numpy
+psutil
+wmi
+pyyaml
+pywin32
