@@ -23,11 +23,12 @@ class DiagnosticModule:
         self.data = {}
 
     def run(self, context: dict): raise NotImplementedError
-    def get_result(self): 
+    
+    def get_result(self):
         return {
-            "name": self.name, 
-            "status": self.status.value, 
-            "summary": self.summary, 
+            "name": self.name,
+            "status": self.status.value,
+            "summary": self.summary,
             "data": self.data,
             "critical": self.critical
         }
@@ -44,14 +45,35 @@ class PluginManager:
             print(f"[!] Could not import 'modules' package: {e}")
             return []
 
-        prefix = modules.__name__ + "."
-        for _, name, _ in pkgutil.iter_modules(modules.__path__, prefix):
-            try:
-                mod = importlib.import_module(name)
-                for _, obj in inspect.getmembers(mod):
-                    if inspect.isclass(obj) and issubclass(obj, DiagnosticModule) and obj is not DiagnosticModule:
-                        self.modules.append(obj())
-            except Exception as e:
-                print(f"[!] Plugin Load Error ({name}): {e}")
-        
+      
+        if getattr(sys, 'frozen', False):
+           
+            module_names = [
+                'modules.mod_battery', 
+                'modules.mod_gpu', 
+                'modules.mod_identity',
+                'modules.mod_ram', 
+                'modules.mod_storage', 
+                'modules.mod_thermal'
+            ]
+            for name in module_names:
+                try:
+                    mod = importlib.import_module(name)
+                    for _, obj in inspect.getmembers(mod):
+                        if inspect.isclass(obj) and issubclass(obj, DiagnosticModule) and obj is not DiagnosticModule:
+                            self.modules.append(obj())
+                except Exception as e:
+                    print(f"[!] Plugin Load Error ({name}): {e}")
+        else:
+            
+            prefix = modules.__name__ + "."
+            for _, name, _ in pkgutil.iter_modules(modules.__path__, prefix):
+                try:
+                    mod = importlib.import_module(name)
+                    for _, obj in inspect.getmembers(mod):
+                        if inspect.isclass(obj) and issubclass(obj, DiagnosticModule) and obj is not DiagnosticModule:
+                            self.modules.append(obj())
+                except Exception as e:
+                    print(f"[!] Plugin Load Error ({name}): {e}")
+
         return self.modules

@@ -1,7 +1,88 @@
-__pycache__/ 
-*.pyc 
-*.pyo 
-*.pyd 
-.venv/ 
-.env 
-Cert_*.html 
+﻿# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.spec
+*.pkg
+*.exe
+*.msi
+*.dll
+
+# Virtual Environment
+venv/
+.venv/
+env/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Project specific
+reports/
+*.html
+*.log
+*.tmp
+*.temp
+*.pdf
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Sensitive files
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets.yaml
+config.local.yaml
+
+# Test files
+test_imports.py
+test_*.py
+
+# Build artifacts
+*.pyz
+*.pkg
+build/
+dist/
+*.spec
+
+# Windows
+*.exe
+*.msi
+*.dll
+*.pdb
+
+# Reports
+Cert_*.html
+reports/
